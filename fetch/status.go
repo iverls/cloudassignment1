@@ -6,12 +6,12 @@ import (
 )
 
 func CheckApiStatus() model.StatusResponse {
-	countriesNowResp, err1 := http.Get("http://129.241.150.113:3500/api/v0.1/")
-	restCountriesResp, err2 := http.Get("http://129.241.150.113:8080/v3.1/alpha/no")
+	restCountriesResp, err1 := http.Get("http://129.241.150.113:8080/v3.1/all?fields=name")
+	currenciesResp, err2 := http.Get("http://129.241.150.113:9090/currency/NOK")
 
 	return model.StatusResponse{
-		CountriesNowApi:  getStatusCode(err1, countriesNowResp),
-		RestCountriesApi: getStatusCode(err2, restCountriesResp),
+		RestCountriesApi: getStatusCode(err1, restCountriesResp),
+		CurrenciesApi:    getStatusCode(err2, currenciesResp),
 	}
 }
 

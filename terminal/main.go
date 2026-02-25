@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/iverls/assignment1_country_info/handler"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/iverls/assignment1_country_info/handler"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
 	}
 
 	http.HandleFunc(handler.ApiBase+handler.InfoPath, handler.CountryInfoHandler)
-	http.HandleFunc(handler.ApiBase+handler.PopulationPath, handler.PopulationHandler)
+	http.HandleFunc(handler.ApiBase+handler.ExchangePath, handler.ExchangeHandler)
 	http.HandleFunc(handler.ApiBase+handler.StatusPath, handler.StatusHandler)
 	http.HandleFunc("/", handler.DefaultHandler)
 

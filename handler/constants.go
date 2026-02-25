@@ -1,8 +1,8 @@
 package handler
 
 const (
-	ApiBase        = "/countryinfo/v1/"
-	InfoPath       = "info/"
-	PopulationPath = "population/"
-	StatusPath     = "status/"
+	ApiBase      = "/countryinfo/v1/"
+	InfoPath     = "info/"
+	ExchangePath = "exchange/"
+	StatusPath   = "status/"
 )

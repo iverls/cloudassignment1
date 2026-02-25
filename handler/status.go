@@ -2,9 +2,10 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/iverls/assignment1_country_info/fetch"
 	"net/http"
 	"time"
+
+	"github.com/iverls/assignment1_country_info/fetch"
 )
 
 var startTime = time.Now()

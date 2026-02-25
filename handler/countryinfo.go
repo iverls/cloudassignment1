@@ -1,28 +1,39 @@
+// Handles the /info/{code} endpoint.
+// Fetches general information about a country and formats it according to our spec.
 package handler
 
 import (
 	"encoding/json"
-	"github.com/iverls/assignment1_country_info/fetch"
 	"net/http"
-	"strconv"
 	"strings"
+
+	"github.com/iverls/assignment1_country_info/fetch"
+	"github.com/iverls/assignment1_country_info/model"
 )
 
 func CountryInfoHandler(w http.ResponseWriter, r *http.Request) {
 	code := strings.TrimPrefix(r.URL.Path, ApiBase+InfoPath)
 
-	result, err := fetch.GetCountryInfo(code)
+	rawCountry, err := fetch.GetCountryData(code)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Country not found", http.StatusNotFound)
 		return
 	}
 
-	limitParam := r.URL.Query().Get("limit")
-	limit, _ := strconv.Atoi(limitParam) // defaults to 0 if empty
+	capital := ""
+	if len(rawCountry.Capital) > 0 {
+		capital = rawCountry.Capital[0]
+	}
 
-	cities, err := fetch.GetCities(result.Name, limit)
-	if err == nil {
-		result.Cities = cities
+	result := model.CountryInfoResponse{
+		Name:       rawCountry.Name.Common,
+		Continents: rawCountry.Continents,
+		Population: rawCountry.Population,
+		Area:       rawCountry.Area,
+		Languages:  rawCountry.Languages,
+		Borders:    rawCountry.Borders,
+		Flag:       rawCountry.Flags.Png,
+		Capital:    capital,
 	}
 
 	w.Header().Set("Content-Type", "application/json")

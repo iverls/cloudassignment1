@@ -126,7 +126,7 @@ GET http://localhost:8080/countryinfo/v1/status/
 
 This service is deployed on [Render](https://render.com).
 
-**Live URL:**\
+**Live URL:** https://cloudassignment1-oezb.onrender.com
 
 
 ## Repository
@@ -135,4 +135,3 @@ This service is deployed on [Render](https://render.com).
 
 **Submitted by:**\
 Iver Lieberg Stieng
-

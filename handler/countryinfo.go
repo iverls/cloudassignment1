@@ -12,6 +12,11 @@ import (
 )
 
 func CountryInfoHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
 	code := strings.TrimPrefix(r.URL.Path, ApiBase+InfoPath)
 
 	rawCountry, err := fetch.GetCountryData(code)

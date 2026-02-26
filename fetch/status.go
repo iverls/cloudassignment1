@@ -6,8 +6,8 @@ import (
 )
 
 func CheckApiStatus() model.StatusResponse {
-	restCountriesResp, err1 := http.Get("http://129.241.150.113:8080/v3.1/all?fields=name")
-	currenciesResp, err2 := http.Get("http://129.241.150.113:9090/currency/NOK")
+	restCountriesResp, err1 := client.Get("http://129.241.150.113:8080/v3.1/all?fields=name")
+	currenciesResp, err2 := client.Get("http://129.241.150.113:9090/currency/NOK")
 
 	return model.StatusResponse{
 		RestCountriesApi: getStatusCode(err1, restCountriesResp),
@@ -19,5 +19,6 @@ func getStatusCode(err error, res *http.Response) int {
 	if err != nil {
 		return http.StatusServiceUnavailable
 	}
+	defer res.Body.Close()
 	return res.StatusCode
 }
